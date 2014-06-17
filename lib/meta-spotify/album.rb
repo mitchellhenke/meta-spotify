@@ -34,7 +34,7 @@ module MetaSpotify
     end
 
     def is_available_in?(territory)
-      (@available_territories.include?('worldwide') || @available_territories.include?(territory.downcase))
+      @available_markets.include?(territory.upcase)
     end
 
     def is_not_available_in?(territory)
