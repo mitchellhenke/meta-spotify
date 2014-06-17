@@ -18,7 +18,7 @@ end
 
 TRACK_URI  = "spotify:track:3zBhJBEbDD4a4SO1EaEiBP"
 ARTIST_URI = "spotify:artist:4YrKBkKSVeqDamzBPWVnSJ"
-ALBUM_URI  = "spotify:album:6G9fHYDCoyEErUkHrFYfs4"
+ALBUM_ID  = "2P2Xwvh2xWXIZ1OWY9S9o5"
 ALBUM_ONE_UPC_URI = "spotify:album:3MiiF9utmtGnLVITgl0JP7"
 
 class Test::Unit::TestCase

@@ -3,7 +3,7 @@ require 'helper'
 class TestAlbum < Test::Unit::TestCase
   context "an album with territories" do
     setup do
-      @album = MetaSpotify::Album.new('name' => 'test', 'availability' => { 'territories' => 'DE' })
+      @album = MetaSpotify::Album.new('name' => 'test', 'available_markets' => ['DE'])
       @worldwide_album = MetaSpotify::Album.new('name' => 'test', 'availability' => { 'territories' => 'worldwide' })
     end
     should "be available in DE" do
@@ -11,9 +11,6 @@ class TestAlbum < Test::Unit::TestCase
     end
     should "not be available in UK" do
       assert @album.is_not_available_in?('UK')
-    end
-    should "be available anywhere" do
-      assert @worldwide_album.is_available_in?('UK')
     end
   end
 
@@ -48,31 +45,25 @@ class TestAlbum < Test::Unit::TestCase
   context "looking up a album" do
     setup do
       FakeWeb.register_uri(:get,
-                           "http://ws.spotify.com/lookup/1/?uri=#{CGI.escape ALBUM_URI}",
-                           :body => fixture_file("album.xml"))
-      @result = MetaSpotify::Album.lookup(ALBUM_URI)
+                           "https://api.spotify.com/v1/albums/#{ALBUM_ID}",
+                           :body => fixture_file("album.json"))
+      @result = MetaSpotify::Album.lookup(ALBUM_ID)
     end
     should "fetch an album and return an album object" do
       assert_kind_of MetaSpotify::Album, @result
-      assert_equal "Remedy", @result.name
-      assert_equal ALBUM_URI, @result.uri
-      assert_equal "1999", @result.released
-      assert_equal "634904012922", @result.upc
-      assert_equal "3a3685aa-9c4d-42f8-a401-e34a89494041", @result.musicbrainz_id
-      assert_equal "http://www.allmusic.com/cg/amg.dll?p=amg&sql=10:dpfixqtkld0e", @result.allmusic_uri
-      assert_equal '6G9fHYDCoyEErUkHrFYfs4', @result.spotify_id
-      assert_equal 'http://open.spotify.com/album/6G9fHYDCoyEErUkHrFYfs4', @result.http_uri
+      assert_equal "Watch The Throne", @result.name
+      assert_equal ALBUM_ID, @result.id
+      assert_equal "2011-08-08", @result.release_date
+      assert_equal "00602527809083", @result.upc
+      assert_equal 'https://open.spotify.com/album/2P2Xwvh2xWXIZ1OWY9S9o5', @result.http_uri
     end
     should "create an artist object for that album" do
       assert_kind_of Array, @result.artists
       assert_kind_of MetaSpotify::Artist, @result.artists.first
-      assert_equal "Basement Jaxx", @result.artists.first.name
-      assert_equal "spotify:artist:4YrKBkKSVeqDamzBPWVnSJ", @result.artists.first.uri
-    end
-    should "fail trying to look up an track" do
-      assert_raises MetaSpotify::URIError do
-        MetaSpotify::Album.lookup(TRACK_URI)
-      end
+      assert_equal 'JAY Z', @result.artists.first.name
+      assert_equal "spotify:artist:3nFkdlSjzX9mRTtwJOzDYB", @result.artists.first.uri
+      assert_kind_of MetaSpotify::Track, @result.tracks.first
+      assert_equal 'No Church In The Wild', @result.tracks.first.name
     end
   end
 
@@ -91,21 +82,6 @@ class TestAlbum < Test::Unit::TestCase
       assert_equal "825646397471", @result.upc
       assert_equal '3MiiF9utmtGnLVITgl0JP7', @result.spotify_id
       assert_equal 'http://open.spotify.com/album/3MiiF9utmtGnLVITgl0JP7', @result.http_uri
-    end
-  end
-
-  context "looking up an album with extra details" do
-    setup do
-      FakeWeb.register_uri(:get,
-                           "http://ws.spotify.com/lookup/1/?extras=trackdetail&uri=#{CGI.escape ALBUM_URI}",
-                           :body => fixture_file('album_with_trackdetail.xml'))
-      @result = MetaSpotify::Album.lookup(ALBUM_URI, :extras => 'trackdetail')
-    end
-
-    should "fetch an album and return an object with more detailed track information" do
-      assert_kind_of MetaSpotify::Album, @result
-      assert_kind_of MetaSpotify::Track, @result.tracks.first
-      assert_equal 'Rendez-vu', @result.tracks.first.name
     end
   end
 end
