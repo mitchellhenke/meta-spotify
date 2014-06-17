@@ -1,0 +1,205 @@
+{
+  "album_type": "album",
+  "artists": [
+    {
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/3nFkdlSjzX9mRTtwJOzDYB"
+      },
+      "href": "https://api.spotify.com/v1/artists/3nFkdlSjzX9mRTtwJOzDYB",
+      "id": "3nFkdlSjzX9mRTtwJOzDYB",
+      "name": "JAY Z",
+      "type": "artist",
+      "uri": "spotify:artist:3nFkdlSjzX9mRTtwJOzDYB"
+    }
+  ],
+  "available_markets": [
+    "AD",
+    "AR",
+    "AT"
+  ],
+  "external_ids": {
+    "upc": "00602527809083"
+  },
+  "external_urls": {
+    "spotify": "https://open.spotify.com/album/2P2Xwvh2xWXIZ1OWY9S9o5"
+  },
+  "genres": [
+    "Hip Hop"
+  ],
+  "href": "https://api.spotify.com/v1/albums/2P2Xwvh2xWXIZ1OWY9S9o5",
+  "id": "2P2Xwvh2xWXIZ1OWY9S9o5",
+  "images": [
+    {
+      "height": 640,
+      "url": "https://i.scdn.co/image/c7886a6daa88dfccf1c32f4cd3d1d34a0f98c444",
+      "width": 640
+    },
+    {
+      "height": 300,
+      "url": "https://i.scdn.co/image/9a1f5d77af8b6a4878d4e60f4da382839b9c6ce3",
+      "width": 300
+    },
+    {
+      "height": 64,
+      "url": "https://i.scdn.co/image/9bcd78a96771e24719b24821d4582cef45101fd9",
+      "width": 64
+    }
+  ],
+  "name": "Watch The Throne",
+  "popularity": 85,
+  "release_date": "2011-08-08",
+  "release_date_precision": "day",
+  "tracks": {
+    "href": "https://api.spotify.com/v1/albums/2P2Xwvh2xWXIZ1OWY9S9o5/tracks?offset=0&limit=50",
+    "items": [
+      {
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3nFkdlSjzX9mRTtwJOzDYB"
+            },
+            "href": "https://api.spotify.com/v1/artists/3nFkdlSjzX9mRTtwJOzDYB",
+            "id": "3nFkdlSjzX9mRTtwJOzDYB",
+            "name": "JAY Z",
+            "type": "artist",
+            "uri": "spotify:artist:3nFkdlSjzX9mRTtwJOzDYB"
+          },
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/5K4W6rqBFWDnAN6FQUkS6x"
+            },
+            "href": "https://api.spotify.com/v1/artists/5K4W6rqBFWDnAN6FQUkS6x",
+            "id": "5K4W6rqBFWDnAN6FQUkS6x",
+            "name": "Kanye West",
+            "type": "artist",
+            "uri": "spotify:artist:5K4W6rqBFWDnAN6FQUkS6x"
+          },
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2h93pZq0e7k5yf4dywlkpM"
+            },
+            "href": "https://api.spotify.com/v1/artists/2h93pZq0e7k5yf4dywlkpM",
+            "id": "2h93pZq0e7k5yf4dywlkpM",
+            "name": "Frank Ocean",
+            "type": "artist",
+            "uri": "spotify:artist:2h93pZq0e7k5yf4dywlkpM"
+          },
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/1W3FSF1BLpY3hlVIgvenLz"
+            },
+            "href": "https://api.spotify.com/v1/artists/1W3FSF1BLpY3hlVIgvenLz",
+            "id": "1W3FSF1BLpY3hlVIgvenLz",
+            "name": "The-Dream",
+            "type": "artist",
+            "uri": "spotify:artist:1W3FSF1BLpY3hlVIgvenLz"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 272506,
+        "explicit": true,
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/3Osd3Yf8K73aj4ySn6LrvK"
+        },
+        "href": "https://api.spotify.com/v1/tracks/3Osd3Yf8K73aj4ySn6LrvK",
+        "id": "3Osd3Yf8K73aj4ySn6LrvK",
+        "name": "No Church In The Wild",
+        "preview_url": "https://p.scdn.co/mp3-preview/5f63e736d50c351a21809fac7e44ca9f33816301",
+        "track_number": 1,
+        "type": "track",
+        "uri": "spotify:track:3Osd3Yf8K73aj4ySn6LrvK"
+      },
+      {
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3nFkdlSjzX9mRTtwJOzDYB"
+            },
+            "href": "https://api.spotify.com/v1/artists/3nFkdlSjzX9mRTtwJOzDYB",
+            "id": "3nFkdlSjzX9mRTtwJOzDYB",
+            "name": "JAY Z",
+            "type": "artist",
+            "uri": "spotify:artist:3nFkdlSjzX9mRTtwJOzDYB"
+          },
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/5K4W6rqBFWDnAN6FQUkS6x"
+            },
+            "href": "https://api.spotify.com/v1/artists/5K4W6rqBFWDnAN6FQUkS6x",
+            "id": "5K4W6rqBFWDnAN6FQUkS6x",
+            "name": "Kanye West",
+            "type": "artist",
+            "uri": "spotify:artist:5K4W6rqBFWDnAN6FQUkS6x"
+          },
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m"
+            },
+            "href": "https://api.spotify.com/v1/artists/6vWDO969PvNqNYHIOW5v0m",
+            "id": "6vWDO969PvNqNYHIOW5v0m",
+            "name": "Beyoncé",
+            "type": "artist",
+            "uri": "spotify:artist:6vWDO969PvNqNYHIOW5v0m"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 266253,
+        "explicit": true,
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/08T26i7SErk6jCDTW7uUFI"
+        },
+        "href": "https://api.spotify.com/v1/tracks/08T26i7SErk6jCDTW7uUFI",
+        "id": "08T26i7SErk6jCDTW7uUFI",
+        "name": "Lift Off",
+        "preview_url": "https://p.scdn.co/mp3-preview/dd4b18020e957b2bdba7f219845034af9b603bdf",
+        "track_number": 2,
+        "type": "track",
+        "uri": "spotify:track:08T26i7SErk6jCDTW7uUFI"
+      },
+      {
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3nFkdlSjzX9mRTtwJOzDYB"
+            },
+            "href": "https://api.spotify.com/v1/artists/3nFkdlSjzX9mRTtwJOzDYB",
+            "id": "3nFkdlSjzX9mRTtwJOzDYB",
+            "name": "JAY Z",
+            "type": "artist",
+            "uri": "spotify:artist:3nFkdlSjzX9mRTtwJOzDYB"
+          },
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/5K4W6rqBFWDnAN6FQUkS6x"
+            },
+            "href": "https://api.spotify.com/v1/artists/5K4W6rqBFWDnAN6FQUkS6x",
+            "id": "5K4W6rqBFWDnAN6FQUkS6x",
+            "name": "Kanye West",
+            "type": "artist",
+            "uri": "spotify:artist:5K4W6rqBFWDnAN6FQUkS6x"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 219333,
+        "explicit": true,
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/4Li2WHPkuyCdtmokzW2007"
+        },
+        "href": "https://api.spotify.com/v1/tracks/4Li2WHPkuyCdtmokzW2007",
+        "id": "4Li2WHPkuyCdtmokzW2007",
+        "name": "Ni**as In Paris",
+        "preview_url": "https://p.scdn.co/mp3-preview/c8a5cf7dd26c54a86e33af11d7b643355224072c",
+        "track_number": 3,
+        "type": "track",
+        "uri": "spotify:track:4Li2WHPkuyCdtmokzW2007"
+      }
+    ],
+    "limit": 50,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 16
+  },
+  "type": "album",
+  "uri": "spotify:album:2P2Xwvh2xWXIZ1OWY9S9o5"
+}
