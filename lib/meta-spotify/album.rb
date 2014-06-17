@@ -20,7 +20,7 @@ module MetaSpotify
         @tracks = []
         hash['tracks']['items'].each { |a| @tracks << Track.new(a) }
       end
-      @release_dated = hash['release_date'] if hash.has_key? 'release_date'
+      @release_date = hash['release_date'] if hash.has_key? 'release_date'
       @href = hash['href'] if hash.has_key? 'href'
       @uri = hash['uri'] if hash.has_key? 'uri'
       @id = hash['id'] if hash.has_key? 'id'
