@@ -41,7 +41,7 @@ module MetaSpotify
 
     def self.lookup(id, opts={})
       item_name = self.name.downcase.gsub(/^.*::/,'')
-      query = {:id => id}
+      query = {}
       query[:extras] = opts[:extras] if opts.has_key? :extras
       result = get("/#{API_VERSION}/#{item_name}s/#{id}",:query => query, :format => :json)
       raise_errors(result)
