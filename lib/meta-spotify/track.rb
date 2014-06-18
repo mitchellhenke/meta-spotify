@@ -2,7 +2,9 @@ module MetaSpotify
   class Track < MetaSpotify::Base
     attr_reader :album, :artists, :track_number, :duration_ms,
                 :available_markets, :explicit, :popularity,
-                :preview_url, :type, :uri, :href, :id
+                :preview_url, :type, :uri, :href, :id,
+                :external_urls, :external_ids, :explicit,
+                :genres
 
     def initialize(hash)
       @name = hash['name']
