@@ -5,58 +5,36 @@ module MetaSpotify
       /^spotify:album:([A-Za-z0-9]+)$/
     end
 
-    attr_reader :released, :artists, :available_territories, :tracks, :upc,
-                :musicbrainz_id, :musicbrainz_uri, :allmusic_id, :allmusic_uri
+    attr_reader :release_date, :artists, :available_markets, :tracks, :upc,
+                :id, :genres, :type, :album_type, :external_urls, :href, :uri,
+                :external_ids
 
     def initialize(hash)
       @name = hash['name']
       @popularity = hash['popularity'].to_f if hash.has_key? 'popularity'
-      if hash.has_key? 'artist'
+      if hash.has_key? 'artists'
         @artists = []
-        if hash['artist'].is_a? Array
-          hash['artist'].each { |a| @artists << Artist.new(a) }
-        else
-          @artists << Artist.new(hash['artist'])
-        end
+        hash['artists'].each { |a| @artists << Artist.new(a) }
       end
       if hash.has_key? 'tracks'
         @tracks = []
-        if hash['tracks']['track'].is_a? Array
-          hash['tracks']['track'].each { |a| @tracks << Track.new(a) }
-        else
-          @tracks << Track.new(hash['tracks']['track'])
-        end
+        hash['tracks']['items'].each { |a| @tracks << Track.new(a) }
       end
-      @released = hash['released'] if hash.has_key? 'released'
-      @uri = hash['href'] if hash.has_key? 'href'
+      @release_date = hash['release_date'] if hash.has_key? 'release_date'
+      @href = hash['href'] if hash.has_key? 'href'
+      @uri = hash['uri'] if hash.has_key? 'uri'
+      @id = hash['id'] if hash.has_key? 'id'
+      @type = hash['type'] if hash.has_key? 'type'
+      @album_type = hash['album_type'] if hash.has_key? 'album_type'
+      @genres = hash['genres'] if hash.has_key? 'genres'
+      @external_urls = hash['external_urls'] if hash.has_key? 'external_urls'
+      @external_ids = hash.fetch('external_ids', [])
 
-      if hash['id'].is_a? Array
-
-        hash['id'].each do |id|
-          case id['type']
-            when 'upc' then
-              @upc = id['__content__']
-            when 'mbid' then
-              @musicbrainz_id = id['__content__']
-              @musicbrainz_uri = id['href']
-            when 'amgid' then
-              @allmusic_id = id['__content__']
-              @allmusic_uri = id['href']
-          end
-        end
-      else
-        @upc = hash['id']['__content__'] if hash.has_key? 'id'
-      end
-
-      @available_territories = if hash.has_key?('availability') && !hash['availability']['territories'].nil?
-        hash['availability']['territories'].split(/\s+/).map {|t| t.downcase } || []
-      else
-        []
-      end
+      @available_markets = hash.fetch('available_markets', [])
     end
 
     def is_available_in?(territory)
-      (@available_territories.include?('worldwide') || @available_territories.include?(territory.downcase))
+      @available_markets.include?(territory.upcase)
     end
 
     def is_not_available_in?(territory)
@@ -64,7 +42,11 @@ module MetaSpotify
     end
 
     def http_uri
-      "http://open.spotify.com/album/#{spotify_id}"
+      external_urls['spotify']
+    end
+
+    def upc
+      external_ids['upc']
     end
 
   end

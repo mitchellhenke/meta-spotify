@@ -5,11 +5,11 @@ require 'uri'
 
 module MetaSpotify
 
-  API_VERSION = '1'
+  API_VERSION = 'v1'
 
   class Base
     include HTTParty
-    base_uri 'http://ws.spotify.com'
+    base_uri 'https://api.spotify.com'
 
     attr_reader :name, :uri, :popularity
 
@@ -21,51 +21,37 @@ module MetaSpotify
       item_name = self.name.downcase.gsub(/^.*::/,'')
       query = {:q => string}
       query[:page] = opts[:page].to_s if opts.has_key? :page
-      result = get("/search/#{API_VERSION}/#{item_name}",
+      result = get("/#{API_VERSION}/search?type=#{item_name}",
         :query => query,
-        :format => :xml,
+        :format => :json,
         :query_string_normalizer => self.method(:normalize))
       raise_errors(result)
       result = result[item_name+'s']
       items = []
-      unless result[item_name].nil?
-        if result[item_name].is_a? Array
-          result[item_name].each do |item|
-            items << self.new(item)
-          end
-        else
-          items << self.new(result[item_name])
-        end
+      result['items'].each do |item|
+        items << self.new(item)
       end
-      return { (item_name+'s').to_sym => items,
-               :query => {
-                 :start_page => result["Query"]["startPage"].to_i,
-                 :role => result["Query"]["role"],
-                 :search_terms => result["Query"]["searchTerms"]
-               },
-               :items_per_page => result["itemsPerPage"].to_i,
-               :start_index => result["startIndex"].to_i,
-               :total_results => result["totalResults"].to_i
+      return { :items => items,
+               :limit => result["limit"].to_i,
+               :next => result["next"].to_i,
+               :offset => result["offset"].to_i,
+               :total => result["total"].to_i
               }
     end
 
-    def self.lookup(uri, opts={})
-      uri = uri.strip
-      raise URIError.new("Spotify URI not in the correct syntax") unless uri_regex.match(uri)
-      query = {:uri => uri}
+    def self.lookup(id, opts={})
+      item_name = self.name.downcase.gsub(/^.*::/,'')
+      query = {}
       query[:extras] = opts[:extras] if opts.has_key? :extras
-      result = get("/lookup/#{API_VERSION}/",:query => query, :format => :xml)
+      result = get("/#{API_VERSION}/#{item_name}s/#{id}",:query => query, :format => :json)
       raise_errors(result)
-      result.each do |k,v|
-        v.merge!({'href' => uri})
-        case k
-        when "artist"
-          return Artist.new(v)
-        when "album"
-          return Album.new(v)
-        when "track"
-          return Track.new(v)
-        end
+      case item_name
+      when "artist"
+        return Artist.new(result)
+      when "album"
+        return Album.new(result)
+      when "track"
+        return Track.new(result)
       end
     end
 

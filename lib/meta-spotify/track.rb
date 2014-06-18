@@ -1,58 +1,37 @@
 module MetaSpotify
   class Track < MetaSpotify::Base
-
-    def self.uri_regex
-      /^spotify:track:([A-Za-z0-9]+)$/
-    end
-
-    attr_reader :album, :artists, :track_number, :length,
-                :musicbrainz_id, :musicbrainz_uri, :allmusic_id, :allmusic_uri,
-                :isrc_id
+    attr_reader :album, :artists, :track_number, :duration_ms,
+                :available_markets, :explicit, :popularity,
+                :preview_url, :type, :uri, :href, :id
 
     def initialize(hash)
       @name = hash['name']
-      @uri = hash['href'] if hash.has_key? 'href'
+      @href = hash['href'] if hash.has_key? 'href'
       @popularity = hash['popularity'].to_f if hash.has_key? 'popularity'
 
-      if hash.has_key? 'artist'
+      if hash.has_key? 'artists'
         @artists = []
-        if hash['artist'].is_a? Array
-          hash['artist'].each { |a| @artists << Artist.new(a) }
-        else
-          @artists << Artist.new(hash['artist'])
-        end
+        hash['artists'].each { |a| @artists << Artist.new(a) }
       end
 
       @album = Album.new(hash['album']) if hash.has_key? 'album'
       @track_number = hash['track_number'].to_i if hash.has_key? 'track_number'
-      @length = hash['length'].to_f if hash.has_key? 'length'
+      @duration_ms = hash['duration_ms'].to_f if hash.has_key? 'duration_ms'
+      @id = hash['id'] if hash.has_key? 'id'
+      @type = hash['type'] if hash.has_key? 'type'
+      @genres = hash['genres'] if hash.has_key? 'genres'
+      @external_urls = hash['external_urls'] if hash.has_key? 'external_urls'
+      @external_ids = hash['external_ids'] if hash.has_key? 'external_ids'
 
-      case hash['id']
-      when Hash
-        node_to_id hash['id']
-      when Array
-        hash['id'].each do |id|
-          node_to_id id
-        end
-      end
+      @available_markets = hash.fetch('available_markets', [])
     end
 
     def http_uri
-      "http://open.spotify.com/track/#{spotify_id}"
+      external_urls['spotify']
     end
 
-    private
-    def node_to_id(node)
-      case node['type']
-        when 'mbid' then
-          @musicbrainz_id = node['__content__']
-          @musicbrainz_uri = node['href']
-        when 'amgid' then
-          @allmusic_id = node
-          @allmusic_uri = node['href']
-        when 'isrc' then
-          @isrc_id = node['__content__']
-      end
+    def isrc_id
+      external_ids['isrc']
     end
   end
 end

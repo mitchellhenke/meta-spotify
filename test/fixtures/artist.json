@@ -1,0 +1,25 @@
+{
+  "external_urls" : {
+    "spotify" : "https://open.spotify.com/artist/3nFkdlSjzX9mRTtwJOzDYB"
+  },
+  "genres" : [ "East Coast Rap", "Gangsta Rap", "Hardcore Rap", "Hip Hop", "Pop-Rap", "Pop/Rock", "Rap" ],
+  "href" : "https://api.spotify.com/v1/artists/3nFkdlSjzX9mRTtwJOzDYB",
+  "id" : "3nFkdlSjzX9mRTtwJOzDYB",
+  "images" : [ {
+    "height" : 500,
+    "url" : "https://i.scdn.co/image/aa1d1eea52481c8343a94fe4d47cd7daa2e95b1e",
+    "width" : 500
+  }, {
+    "height" : 200,
+    "url" : "https://i.scdn.co/image/aa816c40ba1283f2425be80b0abdfffbf53ff98d",
+    "width" : 200
+  }, {
+    "height" : 64,
+    "url" : "https://i.scdn.co/image/0dc5b560cc7296d67565a1a578c02ee35a2e7d3b",
+    "width" : 64
+  } ],
+  "name" : "JAY Z",
+  "popularity" : 96,
+  "type" : "artist",
+  "uri" : "spotify:artist:3nFkdlSjzX9mRTtwJOzDYB"
+}

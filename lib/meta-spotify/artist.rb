@@ -1,29 +1,20 @@
 module MetaSpotify
   class Artist < MetaSpotify::Base
-    
-    def self.uri_regex
-      /^spotify:artist:([A-Za-z0-9]+)$/
-    end
-    
-    attr_reader :albums
-    
+    attr_reader :genres, :href, :id, :external_urls,
+                :popularity, :type, :uri
+
     def initialize(hash)
       @name = hash['name']
       @popularity = hash['popularity'].to_f if hash.has_key? 'popularity'
-      @uri = hash['href'] if hash.has_key? 'href'
-      if hash.has_key? 'albums'
-        @albums = []
-        if hash['albums']['album'].is_a? Array
-          hash['albums']['album'].each { |a| @albums << Album.new(a) }
-        else
-          @albums << Album.new(hash['albums']['album'])
-        end
-      end
+      @uri = hash['uri'] if hash.has_key? 'uri'
+      @href = hash['href'] if hash.has_key? 'href'
+      @id = hash['id'] if hash.has_key? 'id'
+      @genres = hash['genres'] if hash.has_key? 'genres'
+      @type = hash['type'] if hash.has_key? 'type'
     end
 
     def http_uri
-      "http://open.spotify.com/artist/#{spotify_id}"
+      external_urls['spotify']
     end
-
   end
 end
